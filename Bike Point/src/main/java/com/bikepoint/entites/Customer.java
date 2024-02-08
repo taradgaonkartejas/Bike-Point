@@ -12,7 +12,8 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer extends User {
@@ -33,78 +34,6 @@ public class Customer extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-
-	public String getMobileNo() {
-		return mobileNo;
-	}
-
-
-
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-
-
-	public LocalDate getDob() {
-		return dob;
-	}
-
-
-
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
-
-
-
-	public List<Vehicle> getVehicles() {
-		return vehicles;
-	}
-
-
-
-	public void setVehicles(List<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
-
-
 
 	private void addVehicle(Vehicle vehicle) {
 		vehicles.add(vehicle);

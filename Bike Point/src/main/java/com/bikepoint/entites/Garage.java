@@ -20,6 +20,7 @@ public class Garage extends User {
 	@Column(length = 60)
 	private String address;
 	private String gps_location;
+	private long mobileNo;
 	@OneToMany(mappedBy = "garage",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Job> jobs=new ArrayList<>();
 	public Garage() {
@@ -39,7 +40,7 @@ public class Garage extends User {
 	@Override
 	public String toString() {
 		return "Garage [address=" + address + ", gps_location=" + gps_location + ", Id=" + getId()
-				+ ", Email=" + getEmail() + "]";
+				+ ", Email=" + getEmail() + ", Mobile No=" + mobileNo + "]";
 	}
 	
 	

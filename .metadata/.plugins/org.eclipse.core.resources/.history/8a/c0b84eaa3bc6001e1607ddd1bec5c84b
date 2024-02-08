@@ -1,0 +1,9 @@
+package com.bikepoint.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.bikepoint.entites.Customer;
+
+public interface AdminDao extends JpaRepository<Customer,Long > {
+
+}

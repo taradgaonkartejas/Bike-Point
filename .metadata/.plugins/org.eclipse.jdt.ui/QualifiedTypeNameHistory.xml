@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.bikepoint.entites.Admin"/>
+    <fullyQualifiedTypeName name="com.bikepoint.dao.AdminDao"/>
+    <fullyQualifiedTypeName name="com.bikepoint.service.AdminService"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="com.bikepoint.entites.Garage"/>
+    <fullyQualifiedTypeName name="com.bikepoint.dao.GarageDao"/>
+    <fullyQualifiedTypeName name="com.bikepoint.service.GarageService"/>
+</qualifiedTypeNameHistroy>

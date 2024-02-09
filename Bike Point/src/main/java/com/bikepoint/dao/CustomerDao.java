@@ -6,4 +6,5 @@ import com.bikepoint.entites.Customer;
 
 public interface CustomerDao extends JpaRepository<Customer,Long > {
 
+	public Customer findCustomerByEmail(String email);
 }

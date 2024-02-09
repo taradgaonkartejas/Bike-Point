@@ -27,7 +27,7 @@ public class Customer extends User {
 	@Column(length = 10)
 	private String mobileNo;
 	private LocalDate dob;
-	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "customer", orphanRemoval = true)
 	private List<Vehicle> vehicles=new ArrayList<Vehicle>();
 	
 	public Customer() {
@@ -35,12 +35,12 @@ public class Customer extends User {
 	}
 	
 
-	private void addVehicle(Vehicle vehicle) {
+	public void addVehicle(Vehicle vehicle) {
 		vehicles.add(vehicle);
 		vehicle.setCustomer(this);
 	}
 	
-	private void removeVehicle(Vehicle vehicle) {
+	public void removeVehicle(Vehicle vehicle) {
 		vehicles.remove(vehicle);
 		vehicle.setCustomer(null);
 	}

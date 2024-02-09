@@ -2,6 +2,7 @@ package com.bikepoint.entites;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,8 +18,8 @@ public class Service extends BaseEntity {
 	@Column(length = 20)
 	private String serviceType;
 	private double serviceCost;
-	@ManyToOne()
-	@JoinColumn(name = "job_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "job_id")
 	private Job job;
 
 	public Service() {

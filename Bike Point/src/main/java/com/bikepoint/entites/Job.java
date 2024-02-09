@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,15 +17,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Job extends BaseEntity {
-	@ManyToOne()
-	@JoinColumn(name = "garage_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "garage_id")
 	private Garage garage;
-	@ManyToOne()
-	@JoinColumn(name = "vehicle_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vehicle_id")
 	private Vehicle vehicle;
-	@OneToMany(mappedBy = "job",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "job", orphanRemoval = true)
 	private List<Service> services= new ArrayList<Service>();
-	@OneToMany(mappedBy = "job",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "job", orphanRemoval = true)
 	private List<Part> parts = new ArrayList<>();
 	
 	public Job() {

@@ -2,6 +2,7 @@ package com.bikepoint.entites;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,8 +22,8 @@ public class Part extends BaseEntity {
 	@Column(length = 20)
 	private String companyName;
 	private long quantity;
-	@ManyToOne
-	@JoinColumn(name = "part_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "part_id")
 	private Job job;
 
 	public Part() {

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,10 +30,10 @@ public class Vehicle extends BaseEntity {
 	private ProblemType problemType;
 	@Column(length = 100)
 	private String problemDescription;
-	@ManyToOne()
-	@JoinColumn(name = "customer_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
-	@OneToMany(mappedBy = "vehicle",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "vehicle", orphanRemoval = true)
 	private List<Job> jobs= new ArrayList<>();
 	
 	public Vehicle() {

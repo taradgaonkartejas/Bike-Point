@@ -19,7 +19,8 @@ import lombok.Setter;
 public class Garage extends User {
 	@Column(length = 60)
 	private String address;
-	private String gps_location;
+	private double longitude;
+    private double latitude;
 	private long mobileNo;
 	@OneToMany(mappedBy = "garage",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Job> jobs=new ArrayList<>();
@@ -27,19 +28,19 @@ public class Garage extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	void addJob(Job job) {
+	public void addJob(Job job) {
 		jobs.add(job);
 		job.setGarage(this);
 	}
 	
-	void removeJob(Job job) {
+	public void removeJob(Job job) {
 		jobs.remove(job);
 		job.setGarage(null);
 	}
 
 	@Override
 	public String toString() {
-		return "Garage [address=" + address + ", gps_location=" + gps_location + ", Id=" + getId()
+		return "Garage [address=" + address +  ", Id=" + getId()
 				+ ", Email=" + getEmail() + ", Mobile No=" + mobileNo + "]";
 	}
 	

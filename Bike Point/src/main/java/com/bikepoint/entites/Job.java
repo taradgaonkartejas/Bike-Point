@@ -23,35 +23,31 @@ public class Job extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_id")
 	private Vehicle vehicle;
-	@OneToMany(mappedBy = "job", orphanRemoval = true)
-	private List<Service> services= new ArrayList<Service>();
-	@OneToMany(mappedBy = "job", orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Service> services= new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Part> parts = new ArrayList<>();
 	
 	public Job() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void addService(Service service) {
-		services.add(service);
-		service.setJob(this);
-	}
 
-	public void removeService(Service service) {
-		services.remove(service);
-		service.setJob(null);
-	}
-	
 	public void addPart(Part part) {
 		parts.add(part);
-		part.setJob(this);
 	}
-
+	
 	public void removePart(Part part) {
 		parts.remove(part);
-		part.setJob(null);
 	}
 
+	public void addService(Service service) {
+		services.add(service);
+	}
+	
+	public void removeService(Service service) {
+		services.remove(service);
+	}
+	
 	@Override
 	public String toString() {
 		return "Job [garage=" + garage + ", Id=" + getId() + "]";

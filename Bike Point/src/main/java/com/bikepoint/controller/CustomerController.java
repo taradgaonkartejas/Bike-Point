@@ -1,5 +1,7 @@
 package com.bikepoint.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bikepoint.dto.ApiResponse;
 import com.bikepoint.dto.CustomerDto;
+import com.bikepoint.dto.GarageDto;
 import com.bikepoint.dto.VehicleDto;
-import com.bikepoint.exception.ResourceNotFoundException;
 import com.bikepoint.service.CustomerService;
+import com.bikepoint.service.GarageService;
+
 
 @RestController
 @RequestMapping("/customer")
@@ -25,6 +29,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService custSer;
+	
+	@Autowired
+	private GarageService garageSer;
 
 	@PostMapping("/register")
 	public ResponseEntity<?> registerCustomer(@RequestBody @Valid CustomerDto customer) {
@@ -58,5 +65,14 @@ public class CustomerController {
 			return new ResponseEntity<ApiResponse>(new ApiResponse("Failed to add vehicle"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
+	@GetMapping("/findgarages")
+	public ResponseEntity<?> findAllGarages(){
+		List<GarageDto> garages=garageSer.findAllGarages();
+		if (garages != null) {
+			return new ResponseEntity<List<GarageDto>>(garages, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<ApiResponse>(new ApiResponse("Failed to find garages"), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

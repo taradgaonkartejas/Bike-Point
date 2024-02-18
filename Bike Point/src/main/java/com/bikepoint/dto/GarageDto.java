@@ -1,6 +1,5 @@
 package com.bikepoint.dto;
 
-import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -26,8 +25,8 @@ public class GarageDto {
 	private String password;
 	@NotNull(message = "Address cannot be blank.")
 	private String address;
-	@NotNull(message = "Locatin is required.")
-	private String gps_location;
+	private double longitude;
+    private double latitude;
 	@JsonFormat(pattern = "^.*[0-9]{10}")
 	private long mobileNo;
 

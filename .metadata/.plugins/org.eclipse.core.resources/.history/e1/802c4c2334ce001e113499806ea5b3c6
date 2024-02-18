@@ -1,0 +1,36 @@
+package com.bikepoint.service;
+
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bikepoint.dao.GarageDao;
+import com.bikepoint.dao.VehicleDao;
+import com.bikepoint.dto.GarageDto;
+import com.bikepoint.entites.Garage;
+
+@Service
+@Transactional
+public class GarageServiceImpl implements GarageService {
+
+	@Autowired
+	private GarageDao garageDao;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public GarageDto addGarage(GarageDto garage) {
+		Garage gar = mapper.map(garage, Garage.class);
+		return mapper.map(garageDao.save(gar), GarageDto.class);
+	}
+
+	@Override
+	public String removeGarage(Long garageId) {
+		garageDao.deleteById(garageId);
+		return "Garage removed successfully";
+	}
+
+}

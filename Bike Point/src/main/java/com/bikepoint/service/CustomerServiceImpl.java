@@ -2,7 +2,6 @@ package com.bikepoint.service;
 
 import javax.transaction.Transactional;
 
-import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public CustomerDto addCustomer(CustomerDto customer) {
 		Customer cust= mapper.map(customer, Customer.class);
-		cust.toString();
 		return mapper.map(custDao.save(cust), CustomerDto.class);
 	}
 

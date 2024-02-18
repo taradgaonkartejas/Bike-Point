@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bikepoint.dao.JobDao;
+import com.bikepoint.dto.JobDto;
+import com.bikepoint.entites.Job;
+import com.bikepoint.exception.ResourceNotFoundException;
 @Service
 @Transactional
 public class JobServiceImpl implements JobService {
@@ -16,6 +19,12 @@ public class JobServiceImpl implements JobService {
 	
 	@Autowired
 	private ModelMapper mapper;
+
+	@Override
+	public JobDto findJobById(long id) {
+		Job job=jobDao.findById(id).orElseThrow(()->new ResourceNotFoundException("Job not found"));
+		return mapper.map(job, JobDto.class);
+	}
 
 	
 	

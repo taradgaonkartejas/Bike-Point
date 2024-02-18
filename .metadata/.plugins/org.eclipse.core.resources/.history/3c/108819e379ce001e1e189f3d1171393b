@@ -1,0 +1,8 @@
+package com.bikepoint.service;
+
+import com.bikepoint.dto.PartDto;
+
+public interface ServiceService {
+
+	 public PartDto findServiceById(long id);
+}

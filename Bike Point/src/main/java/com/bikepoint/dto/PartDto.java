@@ -20,11 +20,9 @@ public class PartDto {
 	private int id;
 	@NotBlank(message = "Part name is required.")
 	private String partName;
-	@NotBlank(message = "Part Cost is required.")
 	private double partCost;
-	
+	@NotBlank(message = "Company Name is required.")
 	private String companyName;
-	@NotBlank(message = "Quantity is required.")
 	private long quantity;
 
 }

@@ -1,7 +1,0 @@
-package com.bikepoint.dao;
-
-
-public interface VehicleService {
-
-	
-}

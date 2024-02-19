@@ -20,9 +20,15 @@ public class ServiceServiceImpl implements ServiceService {
 	private ModelMapper mapper;
 
 	@Override
-	public ServiceDto findServiceById(long id) {
+	public ServiceDto findServiceById(long id) throws ResourceNotFoundException{
 		  com.bikepoint.entites.Service service = serviceDao.findById(id).orElseThrow(()->new ResourceNotFoundException("Service not found"));
 		return mapper.map(service, ServiceDto.class);
+	}
+
+	@Override
+	public ServiceDto addService(ServiceDto service) {
+		com.bikepoint.entites.Service ser=mapper.map(service, com.bikepoint.entites.Service.class);
+		return mapper.map(serviceDao.save(ser), ServiceDto.class);
 	}
 
 	

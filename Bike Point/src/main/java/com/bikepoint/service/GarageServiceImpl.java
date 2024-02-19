@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.bikepoint.dao.GarageDao;
 import com.bikepoint.dao.JobDao;
-import com.bikepoint.dao.PartDao;
+import com.bikepoint.dao.VehicleDao;
 import com.bikepoint.dto.GarageDto;
 import com.bikepoint.dto.JobDto;
+import com.bikepoint.entites.Customer;
 import com.bikepoint.entites.Garage;
 import com.bikepoint.entites.Job;
-import com.bikepoint.entites.Part;
+import com.bikepoint.entites.Vehicle;
 import com.bikepoint.exception.ResourceNotFoundException;
 
 @Service
@@ -28,6 +29,9 @@ public class GarageServiceImpl implements GarageService {
 	
 	@Autowired
 	private JobDao jobDao;
+	
+	@Autowired
+	private VehicleDao vehicleDao;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -51,22 +55,50 @@ public class GarageServiceImpl implements GarageService {
 	}
 
 	@Override
-	public JobDto addJobInGarage(long garageId, JobDto job) {
-		Job newjob=mapper.map(job, Job.class);
-		
+	public JobDto addJobInGarage(long garageId,long vehicleId, JobDto job) throws ResourceNotFoundException{
+		Job oldjob=mapper.map(job, Job.class);
+		Job savedJob=jobDao.save(oldjob);
 		Garage garage=garageDao.findById(garageId).orElseThrow(()->new ResourceNotFoundException("Garage not found"));
-		garage.addJob(newjob);
-		Job savedJob=jobDao.save(newjob);
-		return mapper.map(savedJob, JobDto.class);
+		Vehicle vehicle=vehicleDao.findById(vehicleId).orElseThrow(()->new ResourceNotFoundException("Vehicle not found"));
+		garage.addJob(savedJob);
+		vehicle.addJob(savedJob);
+		Job newJob=jobDao.save(savedJob);
+		vehicleDao.save(vehicle);
+		return mapper.map(newJob, JobDto.class);
 	}
 
 	@Override
-	public String removeJobFromGarage(long garageId, long jobId) {
+	public String removeJobFromGarage(long garageId, long vehicleId, long jobId) throws ResourceNotFoundException{
 		Job job=jobDao.findById(jobId).orElseThrow(()->new ResourceNotFoundException("Job not found"));
+		Vehicle vehicle=vehicleDao.findById(vehicleId).orElseThrow(()->new ResourceNotFoundException("Vehicle not found"));
 		Garage garage=garageDao.findById(garageId).orElseThrow(()->new ResourceNotFoundException("Garage not found"));
+		vehicle.removeJob(job);
 		garage.removeJob(job);
 		jobDao.delete(job);
 		return "Canceled job sucessfully!";
+	}
+
+	@Override
+	public GarageDto authenticateGarage(String email, String password) throws ResourceNotFoundException{
+		Garage garage=garageDao.findGarageByEmail(email);
+		if (garage==null) {
+			throw new ResourceNotFoundException("Invalid Email!");
+		}
+		if(password.equals(garage.getPassword())) {
+			return mapper.map(garage, GarageDto.class);
+		}
+		return null;
+	}
+	
+	@Override
+	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException {
+		Garage garage=garageDao.findGarageByEmail(email);
+		if (garage != null) {
+			garage.setPassword(newPassword);
+			return "Password changed successfully!";
+		} else {
+			throw new ResourceNotFoundException("Failed to change password.");
+		}
 	}
 
 }

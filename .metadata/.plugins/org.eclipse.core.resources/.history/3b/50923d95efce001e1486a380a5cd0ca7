@@ -1,0 +1,15 @@
+package com.bikepoint.service;
+
+import com.bikepoint.dto.JobDto;
+import com.bikepoint.dto.PartDto;
+import com.bikepoint.dto.ServiceDto;
+
+public interface JobService {
+
+	public JobDto findJobById(long id);
+	
+	public PartDto addPartInJob(long partId, long jobId);
+	
+	public ServiceDto addServiceInJob(long serviceId, long jobId);
+	
+}

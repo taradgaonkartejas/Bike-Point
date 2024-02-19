@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
 	private ModelMapper mapper;
 
 	@Override
-	public AdminDto validateAdmin(String email, String password) {
+	public AdminDto validateAdmin(String email, String password) throws ResourceNotFoundException{
 		Admin admin =adminDao.findAdminByEmail(email);
 		if (admin==null) {
 			throw new ResourceNotFoundException("Invalid Email!");

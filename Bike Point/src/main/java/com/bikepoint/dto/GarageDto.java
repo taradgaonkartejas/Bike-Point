@@ -4,6 +4,7 @@ package com.bikepoint.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

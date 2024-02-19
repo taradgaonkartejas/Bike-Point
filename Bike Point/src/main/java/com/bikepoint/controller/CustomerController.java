@@ -57,7 +57,6 @@ public class CustomerController {
 
 	@PostMapping("/addvehicle/{id}")
 	public ResponseEntity<?> addVehicle(@PathVariable long id, @RequestBody @Valid VehicleDto vehicle){
-		System.out.println(vehicle);
 		VehicleDto veh = custSer.addVehicle(id, vehicle);
 		if (veh != null) {
 			return new ResponseEntity<VehicleDto>(veh, HttpStatus.OK);

@@ -28,7 +28,7 @@ public class PartServiceImpl implements PartService {
 	}
 
 	@Override
-	public PartDto findPartById(long id) {
+	public PartDto findPartById(long id) throws ResourceNotFoundException{
 		Part part= partDao.findById(id).orElseThrow(()->new ResourceNotFoundException("Part not found"));
 		return mapper.map(part, PartDto.class);
 	}

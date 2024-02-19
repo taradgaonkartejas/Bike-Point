@@ -45,12 +45,23 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public VehicleDto addVehicle(long id, VehicleDto vehicle) {
+	public VehicleDto addVehicle(long id, VehicleDto vehicle) throws ResourceNotFoundException {
 		Vehicle veh= mapper.map(vehicle, Vehicle.class);
 		Customer cust= custDao.findById(id).orElseThrow(()->new ResourceNotFoundException("Server error"));
 		cust.addVehicle(veh);
 		Vehicle savedVehicle=vehicleDao.save(veh);
 		return mapper.map(savedVehicle, VehicleDto.class);
+	}
+
+	@Override
+	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException {
+		Customer customer=custDao.findCustomerByEmail(email);
+		if (customer != null) {
+			customer.setPassword(newPassword);
+			return "Password changed successfully!";
+		} else {
+			throw new ResourceNotFoundException("Failed to change password.");
+		}
 	}
 	
 

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +19,11 @@ import com.bikepoint.dto.AdminDto;
 import com.bikepoint.dto.ApiResponse;
 import com.bikepoint.dto.GarageDto;
 import com.bikepoint.dto.PartDto;
+import com.bikepoint.dto.ServiceDto;
 import com.bikepoint.service.AdminService;
 import com.bikepoint.service.GarageService;
 import com.bikepoint.service.PartService;
+import com.bikepoint.service.ServiceService;
 
 @RestController
 @RequestMapping("/admin")
@@ -34,6 +37,9 @@ public class AdminController {
 
 	@Autowired
 	private PartService partSer;
+	
+	@Autowired
+	private ServiceService serviceSer;
 
 	@GetMapping("/login")
 	public ResponseEntity<?> authenticateCustomer(@RequestParam String email, @RequestParam String password) {
@@ -56,7 +62,7 @@ public class AdminController {
 		}
 	}
 
-	@PostMapping("/removegarage/{id}")
+	@DeleteMapping("/removegarage/{id}")
 	public ResponseEntity<?> removeGarage(@PathVariable Long id) {
 		String rem = garageSer.removeGarage(id);
 		return new ResponseEntity<ApiResponse>(new ApiResponse(rem), HttpStatus.OK);
@@ -68,9 +74,18 @@ public class AdminController {
 		if (par != null) {
 			return new ResponseEntity<PartDto>(par, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<ApiResponse>(new ApiResponse("Problem occurred"),
-					HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ApiResponse>(new ApiResponse("Problem occurred"),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
 
+	@PostMapping("/addservice")
+	public ResponseEntity<?> addPart(@RequestBody @Valid ServiceDto service) {
+		ServiceDto ser = serviceSer.addService(service);
+		if (ser != null) {
+			return new ResponseEntity<ServiceDto>(ser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<ApiResponse>(new ApiResponse("Problem occurred"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 }

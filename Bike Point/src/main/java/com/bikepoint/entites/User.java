@@ -1,15 +1,12 @@
 package com.bikepoint.entites;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(unique = true)
 	private String email;
 	private String password;
 	public User() {

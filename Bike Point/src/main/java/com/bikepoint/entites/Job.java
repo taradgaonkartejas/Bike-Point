@@ -3,7 +3,6 @@ package com.bikepoint.entites;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,9 +22,9 @@ public class Job extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_id")
 	private Vehicle vehicle;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany
 	private List<Service> services= new ArrayList<>();
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany
 	private List<Part> parts = new ArrayList<>();
 	
 	public Job() {

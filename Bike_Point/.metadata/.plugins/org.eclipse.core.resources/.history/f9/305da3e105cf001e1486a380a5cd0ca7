@@ -1,0 +1,8 @@
+package com.bikepoint.service;
+
+import com.bikepoint.entites.Customer;
+
+public interface VehicleService {
+
+	public Customer findCustomerbyVehicle(long id);
+}

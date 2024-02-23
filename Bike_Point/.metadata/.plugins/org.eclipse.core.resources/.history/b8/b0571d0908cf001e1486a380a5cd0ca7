@@ -1,0 +1,5 @@
+package com.bikepoint.dto;
+
+public class BillDto {
+
+}

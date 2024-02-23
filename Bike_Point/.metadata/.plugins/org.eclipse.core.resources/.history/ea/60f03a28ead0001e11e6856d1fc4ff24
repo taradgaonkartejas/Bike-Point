@@ -1,0 +1,8 @@
+package com.bikepoint.service;
+
+import com.bikepoint.dto.LoginResponse;
+
+public interface UserService {
+	
+	public LoginResponse authoriseUser(String email, String password);
+}

@@ -1,0 +1,5 @@
+package com.bikepoint.jwtsequrity;
+
+public class JwtAuthenticationFilter {
+
+}

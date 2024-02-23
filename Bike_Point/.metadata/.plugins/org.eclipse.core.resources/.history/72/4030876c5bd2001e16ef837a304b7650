@@ -1,0 +1,45 @@
+package com.bikepoint.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.bikepoint.config.security.CustomUserDetailService;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+		.authorizeRequests()
+		.anyRequest()
+		.authenticated().and()
+		.httpBasic();
+	}
+
+	
+	//Configure Authentication type is Authentication with Database
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//passwordEncoder will do encription of password and then save to the database 
+		auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
+	}
+
+	//to encoading password from database
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+}

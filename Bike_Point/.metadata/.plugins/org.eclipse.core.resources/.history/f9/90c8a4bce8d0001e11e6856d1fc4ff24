@@ -1,0 +1,5 @@
+package com.bikepoint.service;
+
+public class UserServiceImpl implements UserService {
+
+}

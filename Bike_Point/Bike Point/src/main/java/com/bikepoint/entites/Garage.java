@@ -23,7 +23,8 @@ public class Garage extends User {
 	private String address;
 	private double longitude;
     private double latitude;
-	private long mobileNo;
+    @Column(length = 10)
+	private String mobileNo;
 	@OneToMany(mappedBy = "garage",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Job> jobs=new ArrayList<>();
 	public Garage() {

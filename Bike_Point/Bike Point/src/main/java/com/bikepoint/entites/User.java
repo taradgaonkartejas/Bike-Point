@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import lombok.Getter;
 import lombok.Setter;
 

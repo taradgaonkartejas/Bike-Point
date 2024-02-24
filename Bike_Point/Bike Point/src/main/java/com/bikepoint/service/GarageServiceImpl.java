@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bikepoint.dao.GarageDao;
@@ -31,6 +32,9 @@ public class GarageServiceImpl implements GarageService {
 	
 	@Autowired
 	private ProblemDao problemDao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -38,6 +42,7 @@ public class GarageServiceImpl implements GarageService {
 	@Override
 	public GarageDto addGarage(GarageDto garage) {
 		Garage gar = mapper.map(garage, Garage.class);
+		gar.setPassword(passwordEncoder.encode(garage.getPassword()));
 		return mapper.map(garageDao.save(gar), GarageDto.class);
 	}
 
@@ -82,7 +87,7 @@ public class GarageServiceImpl implements GarageService {
 	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException {
 		Garage garage=garageDao.findGarageByEmail(email);
 		if (garage != null) {
-			garage.setPassword(newPassword);
+			garage.setPassword(passwordEncoder.encode(newPassword));
 			return "Password changed successfully!";
 		} else {
 			throw new ResourceNotFoundException("Failed to change password.");

@@ -24,6 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private ProblemDao problemDao;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -31,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public CustomerDto addCustomer(CustomerDto customer) {
 		Customer cust= mapper.map(customer, Customer.class);
+		cust.setPassword(passwordEncoder.encode(customer.getPassword()));
 		return mapper.map(custDao.save(cust), CustomerDto.class);
 	}
 
@@ -47,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException {
 		Customer customer=custDao.findCustomerByEmail(email);
 		if (customer != null) {
-			customer.setPassword(newPassword);
+			customer.setPassword(passwordEncoder.encode(newPassword));
 			return "Password changed successfully!";
 		} else {
 			throw new ResourceNotFoundException("Failed to change password.");

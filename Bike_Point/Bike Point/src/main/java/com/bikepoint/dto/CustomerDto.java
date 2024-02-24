@@ -3,7 +3,8 @@ package com.bikepoint.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
 
@@ -22,18 +23,17 @@ public class CustomerDto {
 	private int id;
 	@Email(message = "Please enter valid email.")
 	private String email;
-	@JsonFormat(pattern = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$" )
-	// Minimum eight characters, at least one uppercase letter, one lowercase
-	// letter, one number and one special character
+	 @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
+	            message = "password must contain atleast 8 characters 1 uppercase, 1 lowercase, 1 special character and 1 digit.")
 	private String password;
-	@NotNull(message = "First name cannot be blank.")
+	@NotBlank(message = "First name cannot be blank.")
 	private String firstName;
-	@NotNull(message = "Last name cannot be blank.")
+	@NotBlank(message = "Last name cannot be blank.")
 	private String lastName;
-	@NotNull(message = "Address cannot be blank.")
+	@NotBlank(message = "Address cannot be blank.")
 	private String address;
-	@JsonFormat(pattern = "^.*[0-9]{10}")
-	private long mobileNo;
+	@Pattern(regexp="(^$|[0-9]{10})", message = "Please enter valid mobile no.")
+	private String mobileNo;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate dob;
 

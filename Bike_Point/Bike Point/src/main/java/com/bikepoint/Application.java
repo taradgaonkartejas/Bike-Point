@@ -30,7 +30,7 @@ public class Application implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(passwordEncoader.encode("abc@123"));
+		System.out.println(passwordEncoader.encode("Abcd@123"));
 		
 	}
 

@@ -1,67 +1,132 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'
+import { logIn } from '../service/userService';
 import './UserLogin.css'
+import { Form, Input,FormFeedback,Label } from 'reactstrap';
 
 
 export default function UserLogin() {
-  
-  return (
-    <>
-    {/* <!----------------------- Main Container --------------------------> */}
-<div class="container d-flex justify-content-center align-items-center min-vh-100" >
 
-{/* <!----------------------- Login Container --------------------------> */}
+    const [loginDetail, setLoginDetail] = useState({
+        email: '',
+        password: ''
+    });
 
-  <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    const [error, setError] = useState({
+        errors: {},
+        isError: false
+    });
 
-{/* <!--------------------------- Left Box -----------------------------> */}
+    const handelChange = (event, feild) => {
+        setLoginDetail({ ...loginDetail, [feild]: event.target.value })
+    }
 
-  <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{background: '#dc3545'}}>
-      <div class="featured-image mb-3">
-       <img src="assets/1.png" class="img-fluid" style={{width: '250px'}}/>
-      </div>
-      <p class="text-white fs-2" style={{fontFamily: "Courier New", fontWeight: "600"}}>Be Verified</p>
-      <small class="text-white text-wrap text-center" style={{width: '17rem',fontFamily: 'Courier New'}}>Make your bike like new on this platform.</small>
-  </div> 
+    //resetting form
+    const resetData = () => {
+        setLoginDetail({
+            email: '',
+            password: ''
+        })
+    }
 
-{/* <!-------------------- ------ Right Box ----------------------------> */}
-   
-  <div class="col-md-6 right-box">
-     <div class="row align-items-center">
-           <div class="header-text mb-4">
-                <h2>Hello,Again</h2>
-                <p>We are happy to have you back.</p>
-           </div>
-           <div class="input-group mb-3">
-               <input type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" id='email' name='email'/>
-           </div>
-           <div class="input-group mb-1">
-               <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" id='password' name='password'/>
-           </div>
-           <div class="input-group mb-5 d-flex justify-content-between">
-               <div class="form-check">
-                   <input type="checkbox" class="form-check-input" id="formCheck"/>
-                   <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
-               </div>
-               <div class="forgot">
-                   <small><a href="#">Forgot Password?</a></small>
-               </div>
-           </div>
-           <div class="input-group mb-3">
-               <button class="btn btn-lg btn-danger w-100 fs-6">Login</button>
-           </div>
-           <div class="input-group mb-3">
-               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style={{width:'20px'}} class="me-2"/><small>Sign In with Google</small></button>
-           </div>
-           <div class="row">
-               <small>Don't have account? <a href="/customerSignup">Sign Up</a></small>
-           </div>
-     </div>
-  </div> 
+    //submitting form    
+    const handletFormSubmit = (event) => {
+        event.preventDefault()
+        //Form validation
+        // if(error.isError){
+        //     toast.error("Form Data is invalid cocorrect all details.")
+        //     return;
+        // }
 
- </div>
-</div>
-    </>
-  )
+        //sending data to server
+        console.log(loginDetail)
+        resetData()
+        logIn(loginDetail).then((jwtTokenData) => {
+            console.log(jwtTokenData);
+            console.log("Sucess")
+            toast.success("User registered successfully!!")
+        }).catch((error) => {
+            console.log(error)
+            console.log("failed")
+            toast.error("Form Data is invalid cocorrect all details.")
+            //handel error in proper way
+            setError({
+                errors: error,
+                isError: true
+            })
+
+        })
+
+
+    }
+
+    return (
+        <>
+            {/* <!----------------------- Main Container --------------------------> */}
+            <div className="container d-flex justify-content-center align-items-center min-vh-100" >
+
+                {/* <!----------------------- Login Container --------------------------> */}
+
+                <div className="row border rounded-5 p-3 bg-white shadow box-area">
+
+                    {/* <!--------------------------- Left Box -----------------------------> */}
+
+                    <div className="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style={{ background: '#dc3545' }}>
+                        <div className="featured-image mb-3">
+                            <img src="assets/1.png" className="img-fluid" style={{ width: '250px' }} />
+                        </div>
+                        <p className="text-white fs-2" style={{ fontFamily: "Courier New", fontWeight: "600" }}>Be Verified</p>
+                        <small className="text-white text-wrap text-center" style={{ width: '17rem', fontFamily: 'Courier New' }}>Make your bike like new on this platform.</small>
+                    </div>
+
+                    {/* <!-------------------- ------ Right Box ----------------------------> */}
+
+                    <Form className="col-md-6 right-box" onSubmit={handletFormSubmit}>
+                        <div className="row align-items-center">
+                            <div className="header-text mb-4">
+                                <h2>Hello,Again</h2>
+                                <p>We are happy to have you back.</p>
+                            </div>
+                            <div className="col-md-12 mb-3">
+                                <Input type="email" className="form-control form-control-lg bg-light fs-6" placeholder="Email address" id='email' name='email'
+                                    value={loginDetail.email} onChange={(e) => { handelChange(e, 'email') }}
+                                    invalid={error.errors?.response?.data?.message ? true : undefined} />
+                                <FormFeedback>
+                                    {error.errors?.response?.data?.message}
+                                </FormFeedback>
+                            </div>
+                            <div className="col-md-12 mb-1">
+                                <Input type="password" className="form-control form-control-lg bg-light fs-6" placeholder="Password" id='password' name='password'
+                                    value={loginDetail.password} onChange={(e) => { handelChange(e, 'password') }}
+                                    invalid={error.errors?.response?.data?.message ? true : undefined} />
+                                <FormFeedback>
+                                    {error.errors?.response?.data?.message}
+                                </FormFeedback>
+                            </div>
+                            <div className="input-group mb-5 d-flex justify-content-between">
+                                <div className="form-check">
+                                    <Input type="checkbox" className="form-check-input" id="formCheck" />
+                                    <Label htmlFor="formCheck" className="form-check-label text-secondary"><small>Remember Me</small></Label>
+                                </div>
+                                <div className="forgot">
+                                    <small><a href="#">Forgot Password?</a></small>
+                                </div>
+                            </div>
+                            <div className="input-group mb-3">
+                                <button type='submit' className="btn btn-lg btn-danger w-100 fs-6">Login</button>
+                            </div>
+                            <div className="input-group mb-3">
+                                <button className="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style={{ width: '20px' }} className="me-2" /><small>Sign In with Google</small></button>
+                            </div>
+                            <div className="row">
+                                <small>Don't have account? <a href="/customerSignup">Sign Up</a></small>
+                            </div>
+                        </div>
+                    </Form>
+
+                </div>
+            </div>
+        </>
+    )
 }

@@ -2,6 +2,7 @@ package com.bikepoint.dto;
 
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
@@ -16,6 +17,7 @@ public class AdminDto {
 	@ReadOnlyProperty
 	private int id;
 	@Email(message = "Please enter valid email.")
+	@NotEmpty
 	private String email;
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
             message = "password must contain atleast 8 characters 1 uppercase, 1 lowercase, 1 special character and 1 digit")

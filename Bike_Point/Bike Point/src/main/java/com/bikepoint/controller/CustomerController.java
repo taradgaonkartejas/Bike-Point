@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,6 @@ import com.bikepoint.service.GarageService;
 @RestController
 @Validated
 @RequestMapping("/customer")
-@CrossOrigin("*")
 public class CustomerController {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class CustomerController {
 	@Autowired
 	private GarageService garageSer;
 
-	@PostMapping("/register")
+	@PostMapping("/signup")
 	public ResponseEntity<?> registerCustomer(@RequestBody @Valid CustomerDto customer) {
 		System.out.println(customer);
 		CustomerDto cust = custSer.addCustomer(customer);
@@ -59,6 +59,7 @@ public class CustomerController {
 			return new ResponseEntity<ApiResponse>(new ApiResponse("Failed to add vehicle"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 	
 	@GetMapping("/findgarages")
 	public ResponseEntity<?> findAllGarages(){

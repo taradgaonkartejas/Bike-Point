@@ -1,8 +1,0 @@
-package com.bikepoint.service;
-
-import com.bikepoint.dto.GarageDto;
-
-public interface GarageService {
-
-	public GarageDto addGarage(GarageDto garage);
-}

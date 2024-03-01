@@ -1,0 +1,21 @@
+package com.bikepoint.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.bikepoint.entites.Customer;
+import com.bikepoint.entites.Problem;
+<<<<<<< HEAD
+=======
+import java.util.List;
+import java.util.Optional;
+>>>>>>> 1f316a6 (Made Various changes)
+
+public interface ProblemDao extends JpaRepository<Problem,Long > {
+
+	public Customer findCustomerById(long id);
+<<<<<<< HEAD
+=======
+	
+	public Optional<List<Problem>> findProblemsByStatus(String status);
+>>>>>>> 1f316a6 (Made Various changes)
+}

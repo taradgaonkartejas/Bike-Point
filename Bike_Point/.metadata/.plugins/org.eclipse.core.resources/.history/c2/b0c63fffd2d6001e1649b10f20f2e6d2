@@ -1,0 +1,49 @@
+package com.bikepoint.dto;
+
+<<<<<<< HEAD
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+=======
+>>>>>>> 1f316a6 (Made Various changes)
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.annotation.ReadOnlyProperty;
+
+<<<<<<< HEAD
+import com.bikepoint.entites.ProblemType;
+
+=======
+>>>>>>> 1f316a6 (Made Various changes)
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+
+@Getter
+@Setter
+@ToString
+public class ProblemDto {
+	@ReadOnlyProperty
+	private int id;
+	@NotBlank(message = "Vehicle company cannot be blank.")
+	private String vehicleCompany;
+	@NotBlank(message = "Vehicle Mode cannot be blank.")
+	private String vehicleModel;
+<<<<<<< HEAD
+	@Enumerated(EnumType.STRING)
+	private ProblemType problemType;
+	@NotBlank(message = "Problem description cannot be blank.")
+	private String problemDescription;
+=======
+	@NotBlank(message = "Problem type cannot be blank.")
+	private String problemType;
+	@NotBlank(message = "Problem description cannot be blank.")
+	private String problemDescription;
+	private String address;
+	private double longitude;
+    private double latitude;
+	@ReadOnlyProperty
+	String status;
+>>>>>>> 1f316a6 (Made Various changes)
+
+}

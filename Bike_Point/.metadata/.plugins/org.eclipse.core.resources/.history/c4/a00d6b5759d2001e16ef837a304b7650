@@ -1,0 +1,5 @@
+package com.bikepoint.utils;
+
+public class PasswordGenerator {
+
+}

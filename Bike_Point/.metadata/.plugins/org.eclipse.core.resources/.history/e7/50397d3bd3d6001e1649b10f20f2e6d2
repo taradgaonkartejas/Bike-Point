@@ -1,0 +1,10 @@
+package com.bikepoint.entites;
+
+public enum ProblemType {
+<<<<<<< HEAD
+	ENGINE,CHASIS,BREAK, CARBURETOR;
+=======
+	Battery,Engine,Tyre,Break,Carburetor,Light,OilLeak;
+>>>>>>> 1f316a6 (Made Various changes)
+
+}

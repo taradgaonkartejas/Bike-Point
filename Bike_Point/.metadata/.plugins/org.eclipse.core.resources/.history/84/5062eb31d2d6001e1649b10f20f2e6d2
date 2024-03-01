@@ -1,0 +1,22 @@
+package com.bikepoint.config.security;
+
+<<<<<<< HEAD
+=======
+import com.bikepoint.dto.LoginResponse;
+
+>>>>>>> 1f316a6 (Made Various changes)
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class JwtAuthResponce {
+
+	
+	private String token;
+<<<<<<< HEAD
+=======
+	
+	private LoginResponse user;
+>>>>>>> 1f316a6 (Made Various changes)
+}

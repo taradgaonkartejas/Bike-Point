@@ -1,0 +1,34 @@
+package com.bikepoint.service;
+
+
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> 1f316a6 (Made Various changes)
+import com.bikepoint.dto.CustomerDto;
+import com.bikepoint.dto.ProblemDto;
+import com.bikepoint.exception.ResourceNotFoundException;
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1f316a6 (Made Various changes)
+public interface CustomerService {
+
+	public CustomerDto addCustomer(CustomerDto customer);
+	
+<<<<<<< HEAD
+	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException;
+	
+	public ProblemDto addVehicle(long id, ProblemDto vehicle) throws ResourceNotFoundException;
+=======
+	public CustomerDto findCustomer(long id);
+	
+	public String forgotPassword(String email, String newPassword) throws ResourceNotFoundException;
+	
+	public ProblemDto addProblem(long id, ProblemDto problem) throws ResourceNotFoundException;
+	
+	public List<ProblemDto> findAllProblems(long id);
+>>>>>>> 1f316a6 (Made Various changes)
+}

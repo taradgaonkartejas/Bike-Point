@@ -1,5 +1,0 @@
-package com.bikepoint.entites;
-
-public class PartDatabase extends BaseEntity {
-
-}

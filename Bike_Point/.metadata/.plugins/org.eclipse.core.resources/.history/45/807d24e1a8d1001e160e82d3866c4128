@@ -1,7 +1,0 @@
-package com.bikepoint.jwtsequrity;
-
-import org.springframework.security.web.authentication.AuthenticationEntryPointFailureHandler;
-
-public class JwtAuthenticationEntryPoint extends AuthenticationEntryPointFailureHandler {
-
-}

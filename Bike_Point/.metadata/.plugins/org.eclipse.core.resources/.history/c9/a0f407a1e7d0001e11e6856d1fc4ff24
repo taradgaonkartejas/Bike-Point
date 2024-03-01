@@ -1,5 +1,0 @@
-package com.bikepoint.dao;
-
-public class LoginRequest {
-
-}

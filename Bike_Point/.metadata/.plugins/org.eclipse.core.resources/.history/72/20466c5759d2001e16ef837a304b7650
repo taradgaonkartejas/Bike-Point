@@ -1,8 +1,0 @@
-package com.bikepoint.utils;
-
-public class PasswordGenerator {
-
-	public static void main(String[] args) {
-		
-	}
-}

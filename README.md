@@ -13,7 +13,6 @@ A full-stack web application built with **Java Spring Boot** for the backend, **
   - [Using Lombok](#using-lombok)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
-- [Database](#database)
 - [License](#license)
 
 ---
@@ -124,5 +123,10 @@ The backend should now be running on http://localhost:8080.
 
 The frontend should now be running on http://localhost:3000.
 
+### License
+
+This project is licensed under the MIT License.
+
+This version provides clear instructions for setting up and running the backend using **Spring Tool Suite (STS)**. Let me know if you need any further refinements!
 
 

@@ -81,7 +81,7 @@ Step 2: Enable Lombok in Your IDE
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/myapp.git
+   git clone https://github.com/taradgaonkartejas/Bike-Point.git
    cd myapp/Bike_Point/Bike Point
 
 
